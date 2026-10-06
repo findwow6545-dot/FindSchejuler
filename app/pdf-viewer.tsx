@@ -1,0 +1,15 @@
+'use client';
+import {useEffect,useRef,useState} from 'react';
+import type {PDFDocumentProxy} from 'pdfjs-dist';
+export default function PdfViewer({url,name}:{url:string;name:string}){
+ const [pdf,setPdf]=useState<PDFDocumentProxy|null>(null),[page,setPage]=useState(1),[zoom,setZoom]=useState(1),[width,setWidth]=useState(600),[error,setError]=useState(''),[loading,setLoading]=useState(true);
+ const host=useRef<HTMLDivElement>(null),canvas=useRef<HTMLCanvasElement>(null);
+ useEffect(()=>{const el=host.current;if(!el)return;const observer=new ResizeObserver(()=>setWidth(Math.max(180,el.clientWidth-32)));observer.observe(el);return()=>observer.disconnect()},[]);
+ useEffect(()=>{let closed=false;let task:ReturnType<typeof import('pdfjs-dist').getDocument>|undefined;setLoading(true);setError('');setPage(1);setPdf(null);
+ (async()=>{try{const lib=await import('pdfjs-dist');if(closed)return;lib.GlobalWorkerOptions.workerSrc='/pdfjs/pdf.worker.min.mjs';task=lib.getDocument({url,cMapUrl:'/pdfjs/cmaps/',cMapPacked:true,standardFontDataUrl:'/pdfjs/standard_fonts/',wasmUrl:'/pdfjs/wasm/'});const doc=await task.promise;if(!closed)setPdf(doc)}catch(e){if(!closed){setError((e as Error).name==='PasswordException'?'암호가 설정된 PDF입니다. 다운로드하여 열어 주세요.':'PDF를 불러오지 못했습니다. 다운로드하여 확인해 주세요.');setLoading(false)}}})();
+ return()=>{closed=true;if(task)void task.destroy()};},[url]);
+ useEffect(()=>{if(!pdf||!canvas.current)return;let closed=false;let render:ReturnType<Awaited<ReturnType<PDFDocumentProxy['getPage']>>['render']>|undefined;setLoading(true);
+ (async()=>{try{const p=await pdf.getPage(page);if(closed||!canvas.current)return;const base=p.getViewport({scale:1});const scale=Math.min(width/base.width,1.6)*zoom;const view=p.getViewport({scale});const ratio=Math.min(window.devicePixelRatio||1,2);const c=canvas.current;c.width=Math.ceil(view.width*ratio);c.height=Math.ceil(view.height*ratio);c.style.width=view.width+'px';c.style.height=view.height+'px';render=p.render({canvas:c,viewport:view,transform:[ratio,0,0,ratio,0,0]});await render.promise;if(!closed)setLoading(false)}catch(e){if(!closed&&(e as Error).name!=='RenderingCancelledException'){setError('이 페이지를 표시하지 못했습니다. 다운로드하여 확인해 주세요.');setLoading(false)}}})();return()=>{closed=true;render?.cancel()};},[pdf,page,zoom,width]);
+ return <div className="pdfviewer"><div className="pdftools"><button disabled={!pdf||page<=1} onClick={()=>setPage(p=>p-1)} aria-label="이전 페이지">←</button><span>{page} / {pdf?.numPages??'…'} 페이지</span><button disabled={!pdf||page>=pdf.numPages} onClick={()=>setPage(p=>p+1)} aria-label="다음 페이지">→</button><button disabled={zoom<=.6} onClick={()=>setZoom(z=>Math.max(.5,z-.25))} aria-label="PDF 축소">−</button><span>{Math.round(zoom*100)}%</span><button disabled={zoom>=2} onClick={()=>setZoom(z=>Math.min(2,z+.25))} aria-label="PDF 확대">＋</button></div><div ref={host} className="pdfpages">{error?<p role="alert">{error}</p>:<><canvas ref={canvas} aria-label={name+' '+page+'페이지'}/>{loading&&<p className="pdfloading" role="status">문서를 불러오는 중…</p>}</>}</div></div>
+}
+

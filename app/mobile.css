@@ -1,0 +1,66 @@
+.schedule-filters{display:flex;align-items:center;gap:6px;min-width:0}
+.dense .mobile-filter-toggle{display:none}
+@media(max-width:800px){
+  .dense.app{min-height:0;height:100dvh;overflow:hidden}
+  .dense .topbar{display:grid;grid-template-columns:1fr;gap:2px;padding:6px 10px 0;height:auto;min-height:0}
+  .dense .brand{min-width:0}.dense .brand h1{font-size:15px}.dense .brand .logo{width:24px;height:24px}
+  .dense .topactions{margin:0;gap:6px;display:flex;flex-wrap:wrap;min-width:0}
+  .dense .topactions .themebutton{margin-left:auto}
+  .dense .divisionbar{width:100%;order:initial;grid-row:3;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+  .dense .divisionbar button{min-height:40px;padding:8px 4px;font-size:14px}
+  .dense .compact-tool,.dense .themebutton,.dense .topactions .primary{min-height:40px;height:40px;font-size:14px;padding:6px 9px}
+  .dense .themebutton{min-width:40px}.dense .topactions .regulations-link{font-size:14px;padding:6px 9px}
+  .dense .viewer-label{display:inline-flex!important;align-items:center;min-height:40px;font-size:14px;padding:6px 2px}
+  .dense main{padding:0 4px max(4px,env(safe-area-inset-bottom));overflow:hidden}
+  .dense .toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:5px;min-height:0;height:auto}
+  .dense .year{display:none}
+  .dense .date-picker{font-size:14px;flex:1;justify-content:flex-start;min-width:0}
+  .dense .date-picker>span{display:inline;font-size:14px;white-space:nowrap}
+  .dense .mobile-filter-toggle{display:inline-flex;flex-shrink:0}
+  .dense .schedule-filters{display:none;order:4;width:100%;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:4px 0}
+  .dense .schedule-filters.is-open{display:grid}
+  .dense .toolbar .schedule-filters [data-slot=select-trigger]{width:100%;min-width:0;height:44px;font-size:14px}
+  .dense .scrollbuttons{width:100%;margin:0;justify-content:space-between;gap:8px}
+  .dense .scrollbuttons button{min-width:44px;height:44px;padding:7px 12px}
+  .dense .rail{touch-action:pan-x pan-y;scroll-snap-type:x proximity;scroll-padding-left:6px}
+  .dense .timeline{padding:4px 6px;height:100%;align-items:stretch}
+  .dense .timeline .month{width:calc(100vw - 36px);max-width:420px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;overscroll-behavior-y:contain;padding:0 6px 16px;scroll-snap-align:start;scrollbar-width:thin}
+  .dense .timeline .monthhead,.dense .timeline .year-start .monthhead{order:0;flex-shrink:0;align-self:stretch;height:58px;min-height:58px;padding-inline:22px;position:sticky;top:0;z-index:2}
+  .dense .timeline .current .monthhead{height:66px;min-height:66px}
+  .dense .timeline .monthhead h2{font-size:36px}.dense .timeline .current .monthhead h2{font-size:44px}
+  .dense .timeline .monthyear{font-size:13px}.dense .timeline .monthhead>span{font-size:13px}
+  .dense .timeline .cards,.dense .timeline .below .cards{order:2;padding:0;overflow:visible;max-height:none;min-height:auto;flex-shrink:0;gap:7px;justify-content:flex-start}
+  .dense .timeline .cards:after{display:none}
+  .dense .timeline .calendar-slot,.dense .timeline .calendar-slot:has(.is-open){order:1;align-self:stretch;margin:0;height:auto;max-height:none;overflow:visible;flex-shrink:0}
+  .dense .timeline .folded-calendar,.dense .timeline .folded-calendar.is-open{height:auto;display:flex;flex-direction:column}
+  .dense .timeline .folded-calendar.is-open>div{overflow:visible}
+  .dense .timeline .calendar-toggle{margin:0 0 4px;min-height:44px;font-size:14px}
+  .dense .event-line{min-height:46px}.dense .event-toggle{min-height:46px;padding:8px 7px 8px 0;gap:5px}
+  .dense .event-title,.dense .event.is-expanded .event-title{font-size:15px;line-height:23px}
+  .dense .event .shortdate{font-size:13px}.dense .event .date-range{font-size:12px;max-width:76px}
+  .dense .event .drag-grip{height:46px}.dense .event-toggle .member-avatar{width:24px;height:24px;min-width:24px;font-size:12px}
+  .dense .event-details{font-size:14px;line-height:22px}.dense .timeline .event .event-note{font-size:15px;line-height:24px;-webkit-line-clamp:5}
+  .dense .event-edit{min-height:44px;font-size:14px;padding:8px}.dense .detailbottom{flex-wrap:wrap}
+  .dense .timeline .addmonth{min-height:44px;font-size:14px}.dense .empty{font-size:14px;padding:22px 10px}
+  .dense .boardfooter{height:auto;min-height:22px;padding:3px 8px;font-size:12px;line-height:18px}
+  .dense .boardfooter span:first-child{white-space:normal;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical}
+  .dense .notice{bottom:max(12px,env(safe-area-inset-bottom));right:10px;max-width:calc(100vw - 20px);font-size:14px}
+  .dense .notice button{min-height:40px;min-width:40px}
+  [data-slot=dialog-content].editor,[data-slot=dialog-content].calendar-dialog{width:calc(100vw - 16px)!important;max-width:560px!important;max-height:calc(100dvh - 20px);padding:20px 16px;overflow:auto;overscroll-behavior:contain}
+  [data-slot=dialog-content]>button[data-slot=dialog-close]{width:40px;height:40px;top:6px;right:6px}
+  [data-slot=dialog-title]{padding-right:28px;overflow-wrap:anywhere}
+  .editor .formrow{grid-template-columns:1fr}.editor input,.editor textarea,.editor [data-slot=select-trigger]{font-size:16px;min-height:44px;min-width:0}
+  .editor label{min-width:0}.editor form{min-width:0}.editor [data-slot=select-trigger]{width:100%;max-width:100%;overflow:hidden}.editor [data-slot=select-value]{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}.editor .formactions{gap:8px}.editor .formactions button,.reordercontrols button:not([data-slot]){min-height:44px}
+  .memberseditor .memberlist{max-height:none}.memberrow{flex-wrap:wrap}.memberrow>div{min-width:150px}.memberrow button{min-height:44px;min-width:48px}
+  .uploadlabel input{max-width:100%}.attachmentrow{align-items:flex-start}.attachmentrow a{min-height:44px}.previewlink{min-height:44px}
+  .documentpreview{height:calc(100dvh - 16px)!important;max-height:calc(100dvh - 16px)!important}.previewactions{flex-wrap:wrap}.previewactions span{max-width:none;width:100%}
+  .pdftools button,.previewactions button,.previewactions a{min-height:44px}.pdfpages{padding:8px}.pdfpages canvas{max-width:100%;height:auto}
+  .overview-name{width:132px;min-width:132px;padding:8px}.overview-name strong{font-size:14px;white-space:normal;line-height:20px}.overview-row{min-height:88px}.overview-bar{height:34px}.overview-caption{font-size:14px}
+  .month-calendar{--calendar-lane:24px}.calendar-weekdays,.calendar-day-grid{font-size:12px}.calendar-event{line-height:22px;font-size:12px}.calendar-caption button{min-height:40px;font-size:13px}.calendar-more{min-height:30px;font-size:12px}
+  .calendar-full{padding:4px}.calendar-full .calendar-event{font-size:12px;line-height:24px}
+  .rules-heading{flex-wrap:wrap}.rules-header{gap:10px}.rules-header button,.rules-back,.rules-save button{min-height:44px}.rules-paper{padding:14px}.rules-heading p{font-size:15px}.rules-save>div{flex-wrap:wrap}
+  .login-page{padding:16px}.login-panel{padding:24px 20px}.login-panel h1{font-size:24px}
+  [data-slot=select-item],[data-slot=dropdown-menu-item]{min-height:44px;font-size:14px}
+}
+@media(max-width:360px){.dense .topactions{gap:3px}.dense .topactions .compact-tool,.dense .topactions .primary{padding-inline:6px;font-size:13px}.dense .date-picker>span{font-size:13px}.dense .mobile-filter-toggle{font-size:13px;padding-inline:6px}}
+@media(pointer:coarse){button,a,input,select,textarea{touch-action:manipulation}.dense .rail button{touch-action:pan-x pan-y}.dense .event .drag-grip{cursor:default}}
