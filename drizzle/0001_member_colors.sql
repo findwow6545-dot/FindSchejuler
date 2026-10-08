@@ -1,0 +1,5 @@
+ALTER TABLE `staff` ADD `color` text DEFAULT '#68768b' NOT NULL;
+--> statement-breakpoint
+WITH ranked AS (SELECT id,(ROW_NUMBER() OVER (ORDER BY CASE WHEN deleted_at IS NULL THEN 0 ELSE 1 END,name,id)-1)%12 AS n FROM staff)
+UPDATE staff SET color=CASE name WHEN '박지환' THEN '#239bd0' WHEN '남진보' THEN '#86602b' WHEN '이창훈' THEN '#e57516' WHEN '강현미' THEN '#83b52b' WHEN '한건우' THEN '#8554c7' ELSE (SELECT CASE n WHEN 0 THEN '#007fa3' WHEN 1 THEN '#dd7210' WHEN 2 THEN '#8554c7' WHEN 3 THEN '#168451' WHEN 4 THEN '#d63b59' WHEN 5 THEN '#3566ca' WHEN 6 THEN '#9b671f' WHEN 7 THEN '#c13b99' WHEN 8 THEN '#66821c' WHEN 9 THEN '#497c86' WHEN 10 THEN '#a24c30' ELSE '#6256a5' END FROM ranked WHERE ranked.id=staff.id) END;
+

@@ -8,6 +8,13 @@
       "when": 1791244800000,
       "tag": "0000_public_baseline",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791452776345,
+      "tag": "0001_member_colors",
+      "breakpoints": true
     }
   ]
 }

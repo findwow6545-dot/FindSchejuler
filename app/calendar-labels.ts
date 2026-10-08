@@ -9,8 +9,4 @@ export function holidayName(date:string):string {
 }
 export function holidayYearAvailable(month:string){return month.slice(0,4) in holidays}
 export function ownerName(owner?:string){return owner?.split(' · ')[0].trim()||'담당자 미정'}
-export function ownerColor(owner?:string){
- const name=ownerName(owner);if(name==='담당자 미정')return '#68768b';
- let hash=0;for(const ch of name)hash=(hash*31+ch.charCodeAt(0))>>>0;
- return `hsl(${hash%360} 58% 38%)`;
-}
+export function ownerColor(_owner?:string,color?:string){return color||'#68768b'}

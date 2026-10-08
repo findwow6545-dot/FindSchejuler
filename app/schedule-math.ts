@@ -1,4 +1,4 @@
-export type PeriodEvent={owner?:string;id:string;title:string;start:string;end:string;division:string;status:string};
+export type PeriodEvent={owner?:string;owner_color?:string;id:string;title:string;start:string;end:string;division:string;status:string};
 export const dayMs=86400000;
 export function dayNumber(value:string){return Date.parse(value+'T00:00:00Z')/dayMs}
 export function dayString(value:number){return new Date(value*dayMs).toISOString().slice(0,10)}
